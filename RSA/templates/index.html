@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Image Encryption & Decryption System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="health-check" id="healthIndicator" title="System Status"></div>
+        
+        <h1>🛡️ Advanced Image Encryption</h1>
+        <p class="subtitle">Secure your images with matrix quantization</p>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('encryptImage')">🔒 Encrypt Image</button>
+            <button class="tab" onclick="switchTab('decryptImage')">🔓 Decrypt Image</button>
+        </div>
+
+        <!-- Encrypt Tab -->
+        <div id="encryptImage-tab" class="tab-content active">
+            <div class="upload-area" id="encryptUploadArea" onclick="document.getElementById('imageFile').click()">
+                <div class="upload-icon">📸</div>
+                <div class="upload-text">Drop your image here or click to select</div>
+                <div class="upload-subtext">Secure quantization with 8 levels</div>
+                <div class="upload-specs">Max size: 50MB • Formats: JPG, PNG, GIF, BMP, TIFF</div>
+            </div>
+            <input type="file" id="imageFile" class="file-input" accept="image/*" multiple="false">
+            
+            <div class="progress-container" id="encryptProgress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="encryptProgressFill"></div>
+                </div>
+                <div class="progress-text" id="encryptProgressText">Processing...</div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 32px;">
+                <button class="btn" id="encryptBtn" type="button" onclick="encryptImage()" disabled>
+                    <span id="encryptBtnText">🔐 Encrypt & Download</span>
+                </button>
+            </div>
+            
+            <div class="security-info">
+                <h4>🔐 Security Features</h4>
+                <ul>
+                    <li>8-level color quantization</li>
+                    <li>Matrix-based image processing</li>
+                    <li>Secure ZIP packaging</li>
+                    <li>Automatic file cleanup</li>
+                </ul>
+            </div>
+            
+            <div id="encryptResult" class="result-area">
+                <div id="encryptMessage" class="status-message"></div>
+                <div id="encryptFileInfo" class="file-info"></div>
+            </div>
+        </div>
+
+        <!-- Decrypt Tab -->
+        <div id="decryptImage-tab" class="tab-content">
+            <div class="upload-area" id="decryptUploadArea" onclick="document.getElementById('zipFile').click()">
+                <div class="upload-icon">📦</div>
+                <div class="upload-text">Drop encrypted package here or click to select</div>
+                <div class="upload-subtext">Upload the encrypted ZIP file you downloaded</div>
+                <div class="upload-specs">Only accepts valid encrypted packages</div>
+            </div>
+            <input type="file" id="zipFile" class="file-input" accept=".zip" multiple="false">
+            
+            <div class="progress-container" id="decryptProgress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="decryptProgressFill"></div>
+                </div>
+                <div class="progress-text" id="decryptProgressText">Processing...</div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 32px;">
+                <button class="btn" id="decryptBtn" type="button" onclick="decryptImage()" disabled>
+                    <span id="decryptBtnText">🔓 Decrypt Image</span>
+                </button>
+            </div>
+            
+            <div id="decryptResult" class="result-area">
+                <div id="decryptMessage" class="status-message"></div>
+                <div id="decryptedImageContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3 id="loadingTitle">Processing...</h3>
+            <p id="loadingSubtext">Please wait while we process your request</p>
+        </div>
+    </div>
+</body>
+</html>
